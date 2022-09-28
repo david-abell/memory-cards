@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* border: 2px solid red; */
+  border-radius: 5px;
+  background-color: gray;
+  /* width: 12.5rem; */
+  /* max-width: calc(0.12 * 100vw); */
+  aspect-ratio: 1;
+}
+
+.content {
+  font-size: clamp(2rem, 0.2391rem + 7.8261vw, 6.5rem);
+  color: #f9f9f9;
+  margin: 0;
+}
+
+.card-cleared {
+  background-color: green;
+}
+
+.card-wrong {
+  background-color: red;
+}
