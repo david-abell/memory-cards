@@ -44,15 +44,15 @@ function App() {
 
   useEffect(() => {
     let cardTimeout: number;
-    if (showCards.length > 1 && showCards[0].number === showCards[1].number) {
+    if (showCards.length >= 2 && showCards[0].number === showCards[1].number) {
       setClearedCards((prev) => [...prev, showCards[0].number]);
       setShowCards([]);
     } else {
       if (showCards.length >= 2) {
+        setTotalGuesses((prev) => prev + 1);
         cardTimeout = setTimeout(() => {
           setShowCards([]);
-          setTotalGuesses((prev) => prev + 1);
-        }, 1000);
+        }, 1100);
       }
     }
     return () => clearTimeout(cardTimeout);
@@ -72,14 +72,6 @@ function App() {
       .map(({ value }) => value);
   }
 
-  const handleCardClick = (card: CardKeys) => {
-    if (showCards.length >= 2) return;
-    setShowCards((prev) => [
-      ...prev,
-      { number: card.number, version: card.version },
-    ]);
-  };
-
   function handleSetGridCount(e: React.MouseEvent<HTMLButtonElement>): void {
     e.preventDefault();
     const inputGridCount = gridCountRef.current?.value;
@@ -94,9 +86,9 @@ function App() {
   function handleNewGame(): void {
     setShowCards([]);
     setClearedCards([]);
+    setTotalGuesses(0);
     const cardSet = handleCardShuffle(createUnsortedCards(gridCount));
     setShuffledCards(cardSet);
-    setTotalGuesses(0);
   }
 
   return (
@@ -109,9 +101,9 @@ function App() {
             type={"number"}
             min={2}
             max={12}
+            defaultValue={gridCount}
             id="grid-count"
             ref={gridCountRef}
-            placeholder={String(gridCount)}
           />
           <button onClick={(e) => handleSetGridCount(e)}>Start new Game</button>
         </form>
@@ -122,21 +114,16 @@ function App() {
           <span id="number-of-guesses">{totalGuesses}</span>
         </div>
       </header>
-      <div className={styles["game-board"]}>
+      <div className={styles["game-board"]} key={JSON.stringify(shuffledCards)}>
         {shuffledCards.map((card: CardKeys, index) => {
           return (
             <React.Fragment key={index + "key"}>
               <Card
                 number={card.number}
-                handleCardClick={() =>
-                  handleCardClick({
-                    number: card.number,
-                    version: card.version,
-                  })
-                }
                 version={card.version}
                 key={index + card.version}
                 showCards={showCards}
+                setShowCards={setShowCards}
                 clearedCards={clearedCards}
               />
             </React.Fragment>

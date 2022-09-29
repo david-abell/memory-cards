@@ -1,26 +1,63 @@
 .card {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  /* border: 2px solid red; */
   border-radius: 5px;
-  background-color: gray;
-  /* width: 12.5rem; */
-  /* max-width: calc(0.12 * 100vw); */
   aspect-ratio: 1;
+  perspective: 1000px;
+  min-width: 100%;
+  min-height: 100%;
+  cursor: pointer;
 }
 
-.content {
+.card-inner {
+  display: flex;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.card-clicked {
+  transform: rotateY(180deg);
+  z-index: 100;
+}
+
+.card-front,
+.card-back {
+  -webkit-backface-visibility: hidden; /* Older Safari */
+  backface-visibility: hidden;
+  border-radius: 5px;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.card-front {
+  background-color: #cad2c5;
+  font-size: clamp(1.6rem, 0.7857rem + 3.619vw, 3.5rem);
+  color: #2f3e46;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateY(-180deg) translate(100%, 0);
+  z-index: 10;
+}
+
+.card-back {
+  background-color: #354f52;
+  /* Attempt two */
+}
+
+/* .content {
   font-size: clamp(2rem, 0.2391rem + 7.8261vw, 6.5rem);
   color: #f9f9f9;
   margin: 0;
-}
+} */
 
-.card-cleared {
+/* .card-cleared {
   background-color: green;
 }
 
 .card-wrong {
   background-color: red;
-}
+} */

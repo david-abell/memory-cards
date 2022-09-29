@@ -1,11 +1,13 @@
 import styles from "./Card.module.css";
-import { useState } from "react";
+import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import { CardKeys } from "./App";
 
 type CardState = {
   showCards: CardKeys[];
-  handleCardClick: () => void;
+  setShowCards: Dispatch<SetStateAction<CardKeys[]>>;
 };
+
+// setMyVar?: (value: boolean | (prevVar: boolean) => boolean) => void;
 
 type ClearedCards = { clearedCards: number[] };
 
@@ -15,9 +17,10 @@ function Card({
   number,
   version,
   showCards,
-  handleCardClick,
   clearedCards,
+  setShowCards,
 }: Props) {
+  const [isVisible, setIsVisible] = useState(false);
   const showNumber = showCards.map((card) => card.number).includes(number);
 
   const showCard = showCards.filter(
@@ -25,27 +28,54 @@ function Card({
   );
   const isCleared = clearedCards.includes(number);
   const isWrong = showCards.length >= 2 && showCard.length && !isCleared;
+  // const isVisible = isCleared ?? (showNumber && showCard.length);
+
+  useEffect(() => {
+    if (!showCards.length && !isCleared) {
+      setIsVisible(false);
+    }
+  }, [showCards.length]);
+
+  // useEffect(() => {
+  //   let cardTimeout: number;
+  //   if (!showCards.length && !isCleared) {
+  //     cardTimeout = setTimeout(() => {
+  //       setIsVisible(false);
+  //     }, 1000);
+  //   }
+  //   if (isWrong) {
+  //     cardTimeout = setTimeout(() => {
+  //       setShowCards([]);
+  //       setIsVisible(false);
+  //     }, 1000);
+  //   }
+  //   return () => clearTimeout(cardTimeout);
+  // }, [isWrong, clearedCards, showCards.length]);
+
+  const handleCardClick = () => {
+    if (isVisible || showCards.length >= 2 || isCleared) return;
+    setIsVisible(true);
+    setShowCards((prev: CardKeys[]) => [...prev, { number, version }]);
+  };
+
+  const isVisibleStyles = [styles["card-inner"], styles["card-clicked"]].join(
+    " "
+  );
+  const isHiddenStyles = styles["card-inner"];
 
   return (
     <>
-      {isCleared ? (
-        <div className={[styles.card, styles["card-cleared"]].join(" ")}>
-          <p className={styles.content}>{number}</p>
+      <div className={styles.card} onClick={handleCardClick}>
+        <div className={isVisible ? isVisibleStyles : isHiddenStyles}>
+          <div className={styles["card-back"]}></div>
+          <div className={styles["card-front"]}>
+            <p>{number}</p>
+          </div>
         </div>
-      ) : (
-        <div
-          className={
-            isWrong
-              ? [styles.card, styles["card-wrong"]].join(" ")
-              : styles.card
-          }
-          onClick={handleCardClick}
-        >
-          {showNumber && !!showCard.length && (
+        {/* {showNumber && !!showCard.length && (
             <p className={styles.content}>{number}</p>
-          )}
-        </div>
-      )}
+          )} */}
+      </div>
     </>
   );
 }
