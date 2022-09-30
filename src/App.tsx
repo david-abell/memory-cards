@@ -8,7 +8,7 @@ export type CardKeys = {
 };
 
 function createUnsortedCards(target: number) {
-  let unsortedCards: CardKeys[] = [];
+  const unsortedCards: CardKeys[] = [];
   const inRangeTarget = Math.min(12, Math.max(2, target)) ** 2;
   const roundedTarget =
     inRangeTarget % 2 === 0 ? inRangeTarget / 2 : (inRangeTarget - 1) / 2;
