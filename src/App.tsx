@@ -114,7 +114,7 @@ function App() {
           <span id="number-of-guesses">{totalGuesses}</span>
         </div>
       </header>
-      <div className={styles["game-board"]} key={JSON.stringify(shuffledCards)}>
+      <div className={styles.grid} key={JSON.stringify(shuffledCards)}>
         {shuffledCards.map((card: CardKeys, index) => {
           return (
             <React.Fragment key={index + "key"}>

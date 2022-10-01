@@ -39,14 +39,17 @@ function Card({
   const isHiddenStyles = styles["card-inner"];
 
   return (
-    <button className={styles.card} onClick={handleCardClick}>
-      <div className={isVisible ? isVisibleStyles : isHiddenStyles}>
+    <div className={styles.card}>
+      <button
+        className={isVisible ? isVisibleStyles : isHiddenStyles}
+        onClick={handleCardClick}
+      >
         <div className={styles["card-back"]}></div>
         <div className={styles["card-front"]}>
           <p>{number}</p>
         </div>
-      </div>
-    </button>
+      </button>
+    </div>
   );
 }
 

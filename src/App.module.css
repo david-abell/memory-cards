@@ -26,7 +26,7 @@
   margin-inline: 1rem;
 }
 
-.game-board {
+.grid {
   max-width: 80%;
   margin: 0 auto;
   display: grid;
