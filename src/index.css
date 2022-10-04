@@ -18,7 +18,7 @@
   --grid-gap-width: 1vw;
   --grid-gap-count: calc(var(--grid-col-count) - 1);
   --total-gap-width: calc(var(--grid-gap-count) * var(--grid-gap-width));
-  --grid-item-min-width: 2.5rem;
+  --grid-item-min-width: 2rem;
   --grid-item-max-width: calc(
     (100% - var(--total-gap-width)) / var(--grid-col-count)
   );
@@ -32,7 +32,6 @@
 body {
   margin: 0;
   min-width: 320px;
-  overflow: hidden;
 }
 
 h1 {
