@@ -33,15 +33,16 @@ function Card({
     setShowCards((prev: CardKeys[]) => [...prev, { number, version }]);
   };
 
-  const isVisibleStyles = [styles["card-inner"], styles["card-clicked"]].join(
+  const visibleStyles = [styles["card-inner"], styles["card-clicked"]].join(
     " "
   );
-  const isHiddenStyles = styles["card-inner"];
+  const hiddenStyles = styles["card-inner"];
+  const clearedStyles = [styles["card-fade"], styles.card].join(" ");
 
   return (
-    <div className={styles.card}>
+    <div className={isCleared ? clearedStyles : styles.card}>
       <button
-        className={isVisible ? isVisibleStyles : isHiddenStyles}
+        className={isVisible ? visibleStyles : hiddenStyles}
         onClick={handleCardClick}
       >
         <div className={styles["card-back"]}></div>

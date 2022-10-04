@@ -131,7 +131,7 @@ function App() {
         })}
         {clearedCards.length > 0 &&
           clearedCards.length * 2 === shuffledCards.length && (
-            <div className={styles.victory}>
+            <div className={[styles.victory, styles["fade-in"]].join(" ")}>
               <p>Victory!</p>
               <button onClick={(e) => handleSetGridCount(e)}>
                 Start new game

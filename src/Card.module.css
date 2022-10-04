@@ -5,6 +5,7 @@
   aspect-ratio: 1;
   perspective: 1000px;
   background-color: transparent;
+  transition: opacity 0.15s ease-out 1s, transform 0.15s ease-out 1s;
 }
 
 .card-inner:focus-visible {
@@ -13,16 +14,6 @@
   outline-width: 2px;
   outline-style: dotted;
 }
-
-.card-inner:hover {
-  box-shadow: 0 0 0 0.2rem red;
-}
-/* .card:focus {
-  box-shadow: 0 0 0 0.2rem black;
-  outline-color: transparent;
-  outline-width: 2px;
-  outline-style: dotted;
-} */
 
 .card-inner {
   display: flex;
@@ -51,9 +42,9 @@
 }
 
 .card-front {
-  background-color: #cad2c5;
+  background-color: #fcfffa;
   font-size: clamp(1.6rem, 0.7857rem + 3.619vw, 3.5rem);
-  color: #2f3e46;
+  color: #050607;
   margin: 0;
   display: flex;
   align-items: center;
@@ -64,4 +55,19 @@
 
 .card-back {
   background-color: #354f52;
+}
+
+.card-fade {
+  transform: scale(0.7);
+  opacity: 0;
+}
+
+.card-fade button {
+  cursor: default;
+}
+
+@media (prefers-color-scheme: light) {
+  .card-front {
+    background-color: #e7ebe5;
+  }
 }
