@@ -1,6 +1,6 @@
 # Memory card game built with Vite.js, React, and Typescript
 
-See it live at []()
+Give it a try: [https://david-abell.github.io/memory-cards/](https://david-abell.github.io/memory-cards/)
 
 ## Project goals
 
