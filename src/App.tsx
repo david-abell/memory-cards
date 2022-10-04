@@ -72,7 +72,9 @@ function App() {
       .map(({ value }) => value);
   }
 
-  function handleSetGridCount(e: React.MouseEvent<HTMLButtonElement>): void {
+  function handleSetNewGameGridCount(
+    e: React.MouseEvent<HTMLButtonElement>
+  ): void {
     e.preventDefault();
     const inputGridCount = gridCountRef.current?.value;
     document.documentElement.style.setProperty(
@@ -105,7 +107,9 @@ function App() {
             id="grid-count"
             ref={gridCountRef}
           />
-          <button onClick={(e) => handleSetGridCount(e)}>Start new Game</button>
+          <button onClick={(e) => handleSetNewGameGridCount(e)}>
+            Start new Game
+          </button>
         </form>
         <div>
           <label htmlFor="numbers-cleared">Total cards cleared</label>
@@ -133,7 +137,7 @@ function App() {
           clearedCards.length * 2 === shuffledCards.length && (
             <div className={[styles.victory, styles["fade-in"]].join(" ")}>
               <p>Victory!</p>
-              <button onClick={(e) => handleSetGridCount(e)}>
+              <button onClick={(e) => handleSetNewGameGridCount(e)}>
                 Start new game
               </button>
             </div>
